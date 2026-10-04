@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Special Surprise</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#020b16;
+    color:white;
+    overflow-x:hidden;
+}
+
+.page{
+    min-height:100vh;
+    width:100%;
+    display:none;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0,191,255,.15),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0,255,150,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #020817,
+            #031b2e,
+            #001b17
+        );
+}
+
+.page.active{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* BACKGROUND */
+
+.bg{
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0,200,255,.08),
+            transparent 45%
+        );
+
+    pointer-events:none;
+}
+
+.stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.7) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+    opacity:.25;
+
+    animation:starsMove 20s linear infinite;
+}
+
+@keyframes starsMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(70px);
+    }
+
+}
+
+/* HOME */
+
+.home-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    width:90%;
+    max-width:650px;
+}
+
+.heart-icon{
+    font-size:70px;
+    color:#00eaff;
+
+    text-shadow:
+        0 0 10px #00eaff,
+        0 0 30px #00ff9d;
+
+    animation:heartPulse 2s infinite;
+    margin-bottom:25px;
+}
+
+@keyframes heartPulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
+
+}
+
+.home-content h1{
+    font-size:clamp(32px,6vw,58px);
+    margin-bottom:18px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00eaff,
+            #00ff9d,
+            #00aaff
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    background-size:200%;
+    animation:gradientMove 4s infinite;
+}
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0%;
+    }
+
+    50%{
+        background-position:100%;
+    }
+
+    100%{
+        background-position:0%;
+    }
+
+}
+
+.home-content p{
+    color:#b9dfe8;
+    font-size:17px;
+    line-height:1.7;
+    margin-bottom:35px;
+}
+
+/* PASSWORD */
+
+.password-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+}
+
+.password-box input{
+    width:280px;
+    max-width:70%;
+
+    padding:17px 22px;
+
+    border-radius:40px;
+
+    border:1px solid rgba(0,234,255,.5);
+
+    background:rgba(0,20,35,.8);
+
+    color:white;
+    font-size:16px;
+
+    outline:none;
+
+    box-shadow:
+        0 0 15px rgba(0,234,255,.12);
+
+    transition:.3s;
+}
+
+.password-box input:focus{
+
+    border-color:#00ff9d;
+
+    box-shadow:
+        0 0 20px rgba(0,255,157,.3);
+}
+
+.password-box input::placeholder{
+    color:#7caab4;
+}
+
+.arrow-btn{
+    width:55px;
+    height:55px;
+
+    border:none;
+    border-radius:50%;
+
+    cursor:pointer;
+
+    color:white;
+    font-size:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00aaff,
+            #00ff9d
+        );
+
+    box-shadow:
+        0 0 15px rgba(0,234,255,.4);
+
+    transition:.3s;
+}
+
+.arrow-btn:hover{
+
+    transform:
+        scale(1.12)
+        rotate(5deg);
+
+    box-shadow:
+        0 0 30px rgba(0,255,157,.6);
+}
+
+.note{
+    margin-top:20px;
+    color:#72c9d5;
+    font-size:14px;
+}
+
+/* COMMON */
+
+.content{
+    position:relative;
+    z-index:2;
+
+    width:90%;
+    max-width:1100px;
+
+    text-align:center;
+
+    padding:50px 0;
+}
+
+.content h2{
+    font-size:clamp(30px,5vw,48px);
+    margin-bottom:15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00eaff,
+            #00ff9d
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    color:#a7cbd3;
+    margin-bottom:40px;
+}
+
+/* MEMORY */
+
+.memory-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.memory{
+    padding:35px 25px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,170,255,.10),
+            rgba(0,255,157,.07)
+        );
+
+    border:1px solid rgba(0,234,255,.25);
+
+    backdrop-filter:blur(10px);
+
+    cursor:pointer;
+
+    transition:.4s;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.3);
+}
+
+.memory:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#00ff9d;
+
+    box-shadow:
+        0 15px 45px rgba(0,255,157,.18);
+}
+
+.memory-icon{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.memory h3{
+    color:#00eaff;
+    margin-bottom:12px;
+}
+
+.memory p{
+    color:#b5d5db;
+    line-height:1.6;
+}
+
+/* BUTTON */
+
+.main-btn{
+    border:none;
+
+    padding:15px 30px;
+
+    border-radius:35px;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #008cff,
+            #00c98b
+        );
+
+    box-shadow:
+        0 0 20px rgba(0,200,255,.25);
+
+    transition:.3s;
+}
+
+.main-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 30px rgba(0,255,157,.4);
+}
+
+/* PAGE 3 */
+
+.envelope-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+    align-items:start;
+}
+
+.envelope{
+
+    min-height:190px;
+
+    padding:35px 25px;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,150,255,.12),
+            rgba(0,255,130,.08)
+        );
+
+    border:1px solid rgba(0,255,157,.25);
+
+    cursor:pointer;
+
+    transition:.4s ease;
+
+    backdrop-filter:blur(10px);
+
+    overflow:hidden;
+}
+
+.envelope:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#00eaff;
+
+    box-shadow:
+        0 15px 40px rgba(0,234,255,.15);
+}
+
+.envelope-icon{
+    font-size:45px;
+    margin-bottom:15px;
+    transition:.4s;
+}
+
+.envelope h3{
+    color:#00ff9d;
+    transition:.4s;
+    line-height:1.4;
+}
+
+.envelope-message{
+
+    max-height:0;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    margin-top:0;
+
+    color:#c4e5e7;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+    transition:
+        max-height .5s ease,
+        opacity .4s ease,
+        margin-top .4s ease;
+}
+
+.envelope.open{
+
+    border-color:#00ff9d;
+
+    box-shadow:
+        0 0 25px rgba(0,255,157,.25);
+
+    transform:translateY(-5px);
+}
+
+.envelope.open .envelope-icon{
+
+    transform:scale(1.15);
+
+    filter:
+        drop-shadow(0 0 10px #00eaff);
+}
+
+.envelope.open .envelope-message{
+
+    max-height:150px;
+
+    opacity:1;
+
+    margin-top:18px;
+}
+
+/* GIFT PAGE */
+
+.gift-page{
+    text-align:center;
+}
+
+.gift-page h2{
+    margin-bottom:15px;
+}
+
+#giftText{
+    color:#a9d9df;
+    margin-bottom:45px;
+}
+
+/* GIFT */
+
+.gift{
+    position:relative;
+
+    width:190px;
+    height:170px;
+
+    margin:
+        0 auto 45px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.box{
+
+    position:absolute;
+
+    bottom:0;
+    left:15px;
+
+    width:160px;
+    height:115px;
+
+    border-radius:8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #006eff,
+            #00b978
+        );
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.4);
+
+    overflow:hidden;
+}
+
+.box::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:68px;
+
+    width:25px;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00eaff,
+            #00ff9d
+        );
+}
+
+.lid{
+
+    position:absolute;
+
+    top:30px;
+    left:5px;
+
+    width:180px;
+    height:35px;
+
+    border-radius:7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #008cff,
+            #00e69a
+        );
+
+    z-index:3;
+
+    transition:.8s;
+}
+
+.lid::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:77px;
+    top:0;
+
+    width:25px;
+    height:35px;
+
+    background:#00eaff;
+}
+
+.ribbon{
+
+    position:absolute;
+
+    z-index:4;
+
+    width:70px;
+    height:35px;
+
+    top:0;
+    left:60px;
+}
+
+.ribbon::before,
+.ribbon::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:60px;
+    height:25px;
+
+    border:8px solid #00ff9d;
+
+    border-radius:50%;
+}
+
+.ribbon::before{
+
+    left:-30px;
+
+    transform:rotate(25deg);
+}
+
+.ribbon::after{
+
+    right:-30px;
+
+    transform:rotate(-25deg);
+}
+
+/* GIFT ANIMATION */
+
+.gift.shake{
+    animation:giftShake .7s ease;
+}
+
+@keyframes giftShake{
+
+    0%,100%{
+        transform:rotate(0);
+    }
+
+    20%{
+        transform:rotate(-8deg);
+    }
+
+    40%{
+        transform:rotate(8deg);
+    }
+
+    60%{
+        transform:rotate(-6deg);
+    }
+
+    80%{
+        transform:rotate(6deg);
+    }
+}
+
+.gift.glow{
+
+    filter:
+        drop-shadow(0 0 10px #00eaff)
+        drop-shadow(0 0 25px #00ff9d);
+
+    animation:glowPulse 1.2s infinite;
+}
+
+@keyframes glowPulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+}
+
+.gift.open .lid{
+
+    transform:
+        translateY(-80px)
+        rotate(-8deg);
+}
+
+.gift.open .box{
+
+    box-shadow:
+        0 0 35px #00eaff,
+        0 0 70px #00ff9d;
+}
+
+/* ==================================================
+   FINAL PAGE
+================================================== */
+
+.final-content{
+
+    position:relative;
+
+    z-index:5;
+
+    width:90%;
+
+    max-width:700px;
+
+    text-align:center;
+
+    padding:35px 0;
+}
+
+/* REAL RING IMAGE */
+
+.final-ring-image{
+
+    width:270px;
+    height:270px;
+
+    margin:
+        0 auto 28px;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(0,234,255,.35);
+
+    background:#080808;
+
+    box-shadow:
+        0 0 20px
+        rgba(0,234,255,.25),
+
+        0 0 45px
+        rgba(0,255,157,.12),
+
+        0 15px 40px
+        rgba(0,0,0,.45);
+
+    animation:
+        ringImageFloat
+        3s
+        ease-in-out
+        infinite;
+}
+
+.final-ring-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:.5s;
+}
+
+.final-ring-image:hover img{
+
+    transform:scale(1.04);
+}
+
+@keyframes ringImageFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+/* FINAL HEADING */
+
+.final-content h2{
+
+    font-size:
+        clamp(32px,6vw,55px);
+
+    margin-bottom:25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00eaff,
+            #00ff9d,
+            #00aaff
+        );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+/* DOUBLE RED HEART */
+
+.double-heart{
+
+    font-size:90px;
+
+    margin:
+        10px auto 30px;
+
+    animation:
+        heartBeat
+        1.8s
+        ease-in-out
+        infinite;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(255,0,70,.5)
+        );
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
+
+}
+
+/* FINAL TEXT */
+
+.final-content p{
+
+    color:#c1e0e5;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+}
+
+.signature{
+
+    color:#00ff9d !important;
+
+    font-size:20px !important;
+
+    margin-top:25px;
+}
+
+/* FINAL BUTTONS */
+
+.final-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-top:35px;
+}
+
+.home-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #064dff,
+            #00a875
+        );
+}
+
+/* FLOATING HEARTS */
+
+.floating-heart{
+
+    position:fixed;
+
+    bottom:-50px;
+
+    pointer-events:none;
+
+    z-index:50;
+
+    animation:
+        floatUp
+        linear
+        forwards;
+}
+
+@keyframes floatUp{
+
+    from{
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:1;
+    }
+
+    to{
+
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity:0;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .memory-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .envelope-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .home-content{
+
+        padding:30px 0;
+    }
+
+    .password-box{
+
+        gap:6px;
+    }
+
+    .password-box input{
+
+        width:240px;
+    }
+
+    .content{
+
+        padding:40px 0;
+    }
+
+    .memory{
+
+        padding:30px 20px;
+    }
+
+    .envelope{
+
+        min-height:170px;
+    }
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:450px){
+
+    .password-box input{
+
+        width:210px;
+
+        padding:15px;
+    }
+
+    .arrow-btn{
+
+        width:50px;
+        height:50px;
+    }
+
+    .gift{
+
+        transform:scale(.85);
+    }
+
+    .gift.shake{
+
+        animation:
+            giftShakeMobile
+            .7s
+            ease;
+    }
+
+    @keyframes giftShakeMobile{
+
+        0%,100%{
+
+            transform:
+                scale(.85)
+                rotate(0);
+        }
+
+        20%{
+
+            transform:
+                scale(.85)
+                rotate(-8deg);
+        }
+
+        40%{
+
+            transform:
+                scale(.85)
+                rotate(8deg);
+        }
+
+        60%{
+
+            transform:
+                scale(.85)
+                rotate(-6deg);
+        }
+
+        80%{
+
+            transform:
+                scale(.85)
+                rotate(6deg);
+        }
+
+    }
+
+    .final-ring-image{
+
+        width:220px;
+        height:220px;
+
+        border-radius:20px;
+
+        margin-bottom:22px;
+    }
+
+}
+
+/* VERY SMALL SCREEN */
+
+@media(max-width:350px){
+
+    .final-ring-image{
+
+        width:190px;
+        height:190px;
+    }
+
+    .final-content p{
+
+        font-size:16px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ==================================================
+     PAGE 1
+================================================== -->
+
+<section
+    class="page active"
+    id="page1"
+>
+
+    <div class="bg"></div>
+
+    <div class="stars"></div>
+
+    <div class="home-content">
+
+        <div class="heart-icon">
+            💙
+        </div>
+
+        <h1>
+            I made something for someone special...
+        </h1>
+
+        <p>
+
+            It's not just a website.<br>
+
+            It's a little piece of my heart.
+
+        </p>
+
+        <div class="password-box">
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter the secret password"
+                onkeydown="handleEnter(event)"
+            >
+
+            <button
+                class="arrow-btn"
+                onclick="checkPassword()"
+            >
+                →
+            </button>
+
+        </div>
+
+        <div class="note">
+            Only you can open this 💙
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PAGE 2
+================================================== -->
+
+<section
+    class="page"
+    id="page2"
+>
+
+    <div class="bg"></div>
+
+    <div class="stars"></div>
+
+    <div class="content">
+
+        <h2>
+            Some Beautiful Memories 💙
+        </h2>
+
+        <p class="subtitle">
+            A few moments worth remembering...
+        </p>
+
+        <div class="memory-grid">
+
+
+            <div
+                class="memory"
+                onclick="showMemory(
+                    'This moment still makes me smile... 💙'
+                )"
+            >
+
+                <div class="memory-icon">
+                    🌅
+                </div>
+
+                <h3>
+                    UnKitta Pudicha onnu Nishu  
+                </h3>
+
+                <p>
+                     Hii Nishu Enaku unkitta pudicha vishiyam.. unnoda character thaann Naa Yarr Kudaiyum evalo close aa palahanadhu kedaiyadhu  But unn kitta pesum podhu enna pathiii open aa ellamey solla mudiyudhu .. You Different Nishu 
+                </p>
+
+            </div>
+
+
+            <div
+                class="memory"
+                onclick="showMemory(
+                    'Some moments become memories without us even realizing it. 💚'
+                )"
+            >
+
+                <div class="memory-icon">
+                    🌌
+                </div>
+
+                <h3>
+                    Memories 
+                </h3>
+
+                <p>
+                    Memories neraya iruku.. Spl marakamudiyatha memories naa oct21 Prepose panna day .. unaku neyabham iruka nu theriyala ..maraka mudiyadhula idhum onnu Nishu 
+                </p>
+
+            </div>
+
+
+            <div
+                class="memory"
+                onclick="showMemory(
+                    'You have a way of making ordinary moments feel special. 💙'
+                )"
+            >
+
+                <div class="memory-icon">
+                    💫
+                </div>
+
+                <h3>
+                    Something Special
+                </h3>
+
+                <p>
+                    Nee Enaku Eppodhumey special Than Nishu.. life Fula Unakaha Unkoodavey Enna pblm vandhalum unkoodavey Nippan Nishu ..God Gift To Me Nishu..
+                </p>
+
+            </div>
+
+
+        </div>
+
+        <button
+            class="main-btn"
+            onclick="goToPage(3)"
+        >
+            Continue 💌
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PAGE 3
+================================================== -->
+
+<section
+    class="page"
+    id="page3"
+>
+
+    <div class="bg"></div>
+
+    <div class="stars"></div>
+
+    <div class="content">
+
+        <h2>
+            Little Things I Wanted To Say 💚
+        </h2>
+
+        <p class="subtitle">
+            Tap one box at a time...
+        </p>
+
+        <div class="envelope-grid">
+
+
+            <div
+                class="envelope"
+                onclick="toggleBox(this)"
+            >
+
+                <div class="envelope-icon">
+                    💌
+                </div>
+
+                <h3>
+                    Something I Wanted To Say
+                </h3>
+
+                <div class="envelope-message">
+
+                Nishu Naa life la Evalo kastapattalum Unna kasta Padutha Mattan Nishu.. Idhu Ennoda promise 
+                    💙
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="envelope"
+                onclick="toggleBox(this)"
+            >
+
+                <div class="envelope-icon">
+                    💚
+                </div>
+
+                <h3>
+                    Ennoda Spl Gift 
+                </h3>
+
+                <div class="envelope-message">
+
+God Spl Gift to me Nishu ...Unna Enaku  Romba Pudikum  
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="envelope"
+                onclick="toggleBox(this)"
+            >
+
+                <div class="envelope-icon">
+                    💙
+                </div>
+
+                <h3>
+                    Fite 
+                </h3>
+
+                <div class="envelope-message">
+
+                    Nishu Namakula Fite varadhuku Reason .. Onnum nee silent aaa poirudha illa na Naa silent aaa poirudhan .. Eppadiyey irundha namakulla Fite Create ahadhu dii .. Its Good 
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <button
+            class="main-btn"
+            onclick="goToPage(4)"
+        >
+            There is one more thing... 🎁
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PAGE 4
+================================================== -->
+
+<section
+    class="page"
+    id="page4"
+>
+
+    <div class="bg"></div>
+
+    <div class="stars"></div>
+
+    <div class="content gift-page">
+
+        <h2>
+            A Special Gift 🎁
+        </h2>
+
+        <p id="giftText">
+            Click the gift box...
+        </p>
+
+
+        <div
+            class="gift"
+            id="giftBox"
+            onclick="giftAnimation()"
+        >
+
+            <div class="ribbon"></div>
+
+            <div class="lid"></div>
+
+            <div class="box"></div>
+
+        </div>
+
+
+        <p class="subtitle">
+
+            Something special is waiting inside
+            💚
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PAGE 5 - FINAL
+================================================== -->
+
+<section
+    class="page"
+    id="page5"
+>
+
+    <div class="bg"></div>
+
+    <div class="stars"></div>
+
+
+    <div class="final-content">
+
+
+        <!-- REAL RING BOX IMAGE -->
+
+        <div class="final-ring-image">
+
+            <img
+                src="C:\Users\ashok\Downloads\ringimg.jpg"
+                alt="Special Ring"
+            >
+
+        </div>
+
+
+        <!-- HEADING -->
+
+        <h2>
+            You Are Special
+        </h2>
+
+
+        <!-- DOUBLE RED HEART -->
+
+        <div class="double-heart">
+            💞
+        </div>
+
+
+        <!-- LETTER -->
+
+        <p>
+            You are one of the special Person 
+            in my life Nishu 
+        </p>
+
+        <p>
+            Un happiness en happiness, un sadness enakkum sadness… un feelings ellame enakku important.
+        </p>
+
+        <p>
+            Enna Nadandhalum  life full-aa un kooda irundhu, unna eppovume Miis Pannama Pathukkuven Nishu 
+        </p>
+
+
+        <p class="signature">
+            I Love You Nishu 
+        </p>
+
+
+        <!-- BUTTONS -->
+
+        <div class="final-buttons">
+
+            <button
+                class="main-btn"
+                onclick="createHearts()"
+            >
+                ✨ One More Surprise
+            </button>
+
+
+            <button
+                class="main-btn home-btn"
+                onclick="goHome()"
+            >
+                🏠 Back to Home
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ==================================================
+   PAGE NAVIGATION
+================================================== */
+
+function goToPage(pageNumber){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById("page" + pageNumber)
+        .classList.add("active");
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* ==================================================
+   PASSWORD
+================================================== */
+
+function checkPassword(){
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const correctPassword =
+        "Nishu";
+
+
+    if(password === correctPassword){
+
+        goToPage(2);
+
+    }
+
+    else{
+
+        alert(
+            "Wrong password 💙"
+        );
+
+        document
+            .getElementById("password")
+            .value = "";
+
+    }
+
+}
+
+
+function handleEnter(event){
+
+    if(event.key === "Enter"){
+
+        checkPassword();
+
+    }
+
+}
+
+
+/* ==================================================
+   MEMORY
+================================================== */
+
+function showMemory(text){
+
+    alert(text);
+
+}
+
+
+/* ==================================================
+   PAGE 3
+   ONLY ONE BOX OPEN
+================================================== */
+
+function toggleBox(clickedBox){
+
+    const allBoxes =
+        document.querySelectorAll(
+            ".envelope"
+        );
+
+
+    allBoxes.forEach(box => {
+
+        if(box !== clickedBox){
+
+            box.classList.remove(
+                "open"
+            );
+
+        }
+
+    });
+
+
+    clickedBox.classList.toggle(
+        "open"
+    );
+
+}
+
+
+/* ==================================================
+   GIFT
+================================================== */
+
+let giftClicks = 0;
+
+
+function giftAnimation(){
+
+    const gift =
+        document.getElementById(
+            "giftBox"
+        );
+
+
+    const text =
+        document.getElementById(
+            "giftText"
+        );
+
+
+    giftClicks++;
+
+
+    /* FIRST CLICK */
+
+    if(giftClicks === 1){
+
+        gift.classList.add(
+            "shake"
+        );
+
+
+        text.innerText =
+            "Wait... something is happening 👀";
+
+
+        setTimeout(() => {
+
+            gift.classList.remove(
+                "shake"
+            );
+
+        },700);
+
+    }
+
+
+    /* SECOND CLICK */
+
+    else if(giftClicks === 2){
+
+        gift.classList.add(
+            "glow"
+        );
+
+
+        text.innerText =
+            "One more click... ✨";
+
+    }
+
+
+    /* THIRD CLICK */
+
+    else if(giftClicks === 3){
+
+        gift.classList.add(
+            "open"
+        );
+
+
+        text.innerText =
+            "Your surprise is ready 💙";
+
+
+        setTimeout(() => {
+
+            goToPage(5);
+
+            createHearts();
+
+        },1200);
+
+    }
+
+}
+
+
+/* ==================================================
+   FLOATING HEARTS
+================================================== */
+
+function createHearts(){
+
+    const symbols = [
+
+        "💙",
+        "💚",
+        "💫",
+        "✨",
+        "🌟",
+        "💎"
+
+    ];
+
+
+    for(
+        let i = 0;
+        i < 25;
+        i++
+    ){
+
+        const heart =
+            document.createElement(
+                "div"
+            );
+
+
+        heart.className =
+            "floating-heart";
+
+
+        heart.innerText =
+            symbols[
+                Math.floor(
+                    Math.random()
+                    * symbols.length
+                )
+            ];
+
+
+        heart.style.left =
+            Math.random() * 100 + "%";
+
+
+        heart.style.fontSize =
+            (
+                15 +
+                Math.random() * 25
+            ) + "px";
+
+
+        heart.style.animationDuration =
+            (
+                4 +
+                Math.random() * 4
+            ) + "s";
+
+
+        document.body.appendChild(
+            heart
+        );
+
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        },8000);
+
+    }
+
+}
+
+
+/* ==================================================
+   BACK HOME
+================================================== */
+
+function goHome(){
+
+    goToPage(1);
+
+
+    document
+        .getElementById("password")
+        .value = "";
+
+
+    giftClicks = 0;
+
+
+    const gift =
+        document.getElementById(
+            "giftBox"
+        );
+
+
+    gift.classList.remove(
+        "shake",
+        "glow",
+        "open"
+    );
+
+
+    document
+        .getElementById("giftText")
+        .innerText =
+        "Click the gift box...";
+
+
+    document
+        .querySelectorAll(".envelope")
+        .forEach(box => {
+
+            box.classList.remove(
+                "open"
+            );
+
+        });
+
+}
+
+
+/* ==================================================
+   ESC KEY
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            document
+                .querySelectorAll(
+                    ".envelope"
+                )
+                .forEach(box => {
+
+                    box.classList.remove(
+                        "open"
+                    );
+
+                });
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
